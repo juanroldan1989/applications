@@ -10,22 +10,22 @@ and easily integrable with containerized environments like **AWS ECS** and **AWS
 
 This repository contains the following Flask applications:
 
-1. **Farewell API**  
+1. **Farewell API**
    Returns a random farewell phrase.
 
-2. **Fareweller API**  
+2. **Fareweller API**
    Returns a farewell message built based on Farewell and Name APIs.
 
-3. **Greeter API**  
+3. **Greeter API**
    Returns a greeting message built based on Greeting and Name APIs.
 
-4. **Greeting API**  
+4. **Greeting API**
    Provides greeting phrases.
 
-5. **Name API**  
+5. **Name API**
    Supplies random names.
 
-6. **SQS Processor**  
+6. **SQS Processor**
    Processes SQS messages and displays states within a landing page.
 
 # Use Cases
@@ -56,18 +56,21 @@ for app in fareweller farewell greeter greeting name sqs-processor; do
 done
 ```
 
-## Build and Push Automatically (GitHub Actions)
+## Continuous Integration and Deployment (Github Actions)
 
-This repository also includes a GitHub Actions workflow (`.github/workflows/docker-build-and-push.yml`)
+This repository includes a GitHub Actions workflow to build and push Docker images for all applications.
 
-that automates the process of building and pushing Docker images to Docker Hub whenever changes are pushed to the repository.
+The workflow is designed to be efficient by only building and pushing images for directories that have changed in a commit.
 
-The workflow is triggered on changes to any application directory and performs the following steps:
+### Workflow Details
 
-1. Checks out the code.
-2. Sets up Docker.
-3. Builds Docker images.
-4. Pushes the images to Docker Hub.
+- **Trigger Conditions:** The workflow triggers on push and pull_request events for any file or directory in the repository.
+
+- **Selective Build and Push:** Only directories containing a Dockerfile and changed in the current commit are built and pushed to Docker Hub.
+
+- **Image Tagging:** The Docker images are tagged using the short commit SHA (HEAD) for traceability.
+
+This approach ensures that Docker images are only built and pushed when necessary, saving time and resources while maintaining traceability through commit SHA tags.
 
 # Adding Applications
 
@@ -78,6 +81,7 @@ To add a new Flask application:
 
 - `Dockerfile`: Defines how the application will be containerized.
 - `app.py`: The main Flask application logic.
+- `test_app.py`: Unit tests to validate the correctness of the API.
 - `requirements.txt`: List of dependencies.
 - `README.md`: Documentation for the application.
 
