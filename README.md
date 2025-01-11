@@ -4,7 +4,7 @@ A collection of simple yet powerful microservices designed for cloud-native appl
 
 This repository serves as a portfolio of reusable Flask applications, each one designed to be modular, lightweight
 
-and easily integrable with containerized environments like **AWS ECS** and **AWS EKS**.
+and easily integrable with containerized environments like **Docker Compose**, **AWS ECS** and **AWS EKS**.
 
 # Contents
 
