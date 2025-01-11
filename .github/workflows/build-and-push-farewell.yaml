@@ -3,10 +3,10 @@ name: Build and Push Docker Image
 on:
   push:
     paths:
-      - 'services/farewell/**'  # Trigger this workflow when changes occur in farewell directory.
+      - 'farewell/**'  # Trigger this workflow when changes occur in farewell directory.
   pull_request:
     paths:
-      - 'services/farewell/**'  # Trigger this workflow for pull requests involving farewell directory.
+      - 'farewell/**'  # Trigger this workflow for pull requests involving farewell directory.
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
           IMAGE_TAG=$(git rev-parse --short HEAD)  # Use short commit SHA as tag
 
           echo "Building Docker image with tag $IMAGE_TAG"
-          docker build -t $IMAGE_NAME:$IMAGE_TAG ./services/farewell
+          docker build -t $IMAGE_NAME:$IMAGE_TAG ./farewell
 
           echo "Pushing Docker image $IMAGE_NAME:$IMAGE_TAG"
           docker push $IMAGE_NAME:$IMAGE_TAG
