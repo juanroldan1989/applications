@@ -27,6 +27,18 @@ Returns a personalized farewell message.
 }
 ```
 
+### `GET /health`
+
+Returns the health status of the service.
+
+- Example Response:
+
+```bash
+{
+  "status": "healthy"
+}
+```
+
 ## How to Run
 
 1. Clone the repository:
