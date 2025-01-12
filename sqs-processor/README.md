@@ -144,7 +144,13 @@ aws sqs send-message \
 
 6. Message displayed within LocalStack cloud interface for SQS Queue A:
 
+<img width="1367" alt="Screenshot 2025-01-06 at 15 55 28" src="https://github.com/user-attachments/assets/634e8908-5237-4f7d-911a-13e12f13bd80" />
+
 7. Message pulled and processed by SQS Processor App:
+
+<img width="799" alt="Screenshot 2025-01-06 at 15 48 11" src="https://github.com/user-attachments/assets/329002c3-79e2-4cd3-8d3b-023151a44099" />
+
+8. Message removed from SQS Queue afterwards by App.
 
 ## Unit Tests
 
