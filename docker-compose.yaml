@@ -1,0 +1,62 @@
+services:
+  greeter:
+    build: services/greeter
+    container_name: greeter
+    ports:
+      - "5000:5000"
+    networks:
+      - backend
+    depends_on:
+      - name
+      - greeting
+
+  name:
+    build: services/name
+    container_name: name
+    ports:
+      - "5001:5001"
+    networks:
+      - backend
+
+  greeting:
+    build: services/greeting
+    container_name: greeting
+    ports:
+      - "5002:5002"
+    networks:
+      - backend
+
+  fareweller:
+    build: services/fareweller
+    container_name: fareweller
+    ports:
+      - "5003:5003"
+    networks:
+      - backend
+    depends_on:
+      - name
+      - farewell
+
+  farewell:
+    build: services/farewell
+    container_name: farewell
+    ports:
+      - "5004:5004"
+    networks:
+      - backend
+
+  sqs-processor:
+    build: services/sqs-processor
+    container_name: sqs-processor
+    environment:
+      - AWS_REGION=us-east-1
+      - SLACK_WEBHOOK_URL=""
+      - SQS_QUEUE_URL=http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/queue-a
+      - LOCALSTACK_ENDPOINT=https://localhost.localstack.cloud:4566
+    ports:
+      - "5005:5005"
+    networks:
+      - backend
+
+networks:
+  backend:
