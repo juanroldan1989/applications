@@ -38,25 +38,29 @@ The primary use cases include:
 - **Reusable Modules**: Serving as building blocks for larger microservice architectures.
 - **Learning & Experimentation**: Providing a playground for experimenting with cloud technologies, CI/CD pipelines and container orchestration.
 
-# How to Build and Push Docker Images
+# Launch Applications
 
-## Build and Push Manually (Bash Script)
-
-You can build and push all Docker images manually using the following bash script:
+1. Docker Compose can start all applications locally:
 
 ```bash
-#!/bin/bash
-
-for app in fareweller farewell greeter greeting name sqs-processor; do
-  echo "Building Docker image for $app..."
-  cd $app
-  docker build -t <docker-hub-username>/$app .
-  docker push <docker-hub-username>/$app
-  cd ..
-done
+docker-compose up
 ```
 
-## Continuous Integration and Deployment (Github Actions)
+2. Review each `README` file for each application to understand endpoints and ports.
+
+# Build and Push Apps Docker Images
+
+## Through manual script (debugging purposes)
+
+Within `scripts` folder, you can build and push all Docker images manually using the following bash script:
+
+```bash
+cd scripts
+
+./build-and-push-images.sh
+```
+
+## Through Github Actions (Continuous Integration and Deployment)
 
 This repository includes a GitHub Actions workflow to build and push Docker images for all applications.
 
@@ -71,6 +75,16 @@ The workflow is designed to be efficient by only building and pushing images for
 - **Image Tagging:** The Docker images are tagged using the short commit SHA (HEAD) for traceability.
 
 This approach ensures that Docker images are only built and pushed when necessary, saving time and resources while maintaining traceability through commit SHA tags.
+
+## Clean up local environment
+
+Within `scripts` folder, you can run a script to clean all docker images, containers and volumes:
+
+```bash
+cd scripts
+
+./docker-clean-up.sh
+```
 
 # Adding Applications
 
