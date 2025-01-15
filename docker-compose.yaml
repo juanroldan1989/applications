@@ -3,7 +3,7 @@ services:
     build: services/greeter
     container_name: greeter
     ports:
-      - "5000:5000"
+      - "5006:5000" # Expose the service on port 5006 since port 5000 is already in use by Mac's default Control Center
     networks:
       - backend
     depends_on:
