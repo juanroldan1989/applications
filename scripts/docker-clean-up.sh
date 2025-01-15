@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Remove all images
-docker rmi $(docker images -q) -f
+docker image ls | grep applications | awk '{print $3}' | xargs docker image rm -f
 
 # Remove all containers
 docker rm $(docker ps -a -q) -f
