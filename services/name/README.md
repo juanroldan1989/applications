@@ -1,4 +1,4 @@
-## Random Name Generator API
+# Random Name Generator API
 
 This is a simple Flask-based API that returns a random name from a predefined list.
 
