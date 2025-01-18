@@ -1,6 +1,23 @@
 # Applications
 
-A collection of simple yet powerful microservices designed for cloud-native applications.
+![Build Status](https://img.shields.io/github/actions/workflow/status/juanroldan1989/applications/ci.yml)
+![License](https://img.shields.io/github/license/juanroldan1989/applications)
+![Last Commit](https://img.shields.io/github/last-commit/juanroldan1989/applications)
+
+_A collection of simple yet powerful microservices designed for cloud-native applications._
+
+![Project Logo](https://elogroup.com/wp-content/uploads/2024/04/WhatsApp-Image-2024-04-18-at-15.57.23-1024x574.jpeg)
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Contents](#contents)
+3. [Use Cases](#use-cases)
+4. [Launch](#launch-applications)
+5. [Contributing](#contributing)
+6. [License](#license)
+
+# Introduction
 
 This repository serves as a portfolio of reusable Flask applications, each one designed to be modular, lightweight
 
@@ -86,25 +103,10 @@ cd scripts
 ./docker-clean-up.sh
 ```
 
-# Adding Applications
+# Contributing
 
-To add a new Flask application:
-
-1. Create a new folder with the application name.
-2. Include the following files:
-
-- `Dockerfile`: Defines how the application will be containerized.
-- `app.py`: The main Flask application logic.
-- `test_app.py`: Unit tests to validate the correctness of the API.
-- `requirements.txt`: List of dependencies.
-- `README.md`: Documentation for the application.
-
-3. Update the bash script and GitHub Actions workflow if needed.
-
-# Future Plans
-
-Extend the portfolio with more Flask services for additional use cases.
+Contributions are welcome and greatly appreciated! If you would like to contribute to this project, please follow the guidelines within [CONTRIBUTING.md](CONTRIBUTING.md).
 
 # License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+This project is licensed under the terms of the [MIT License](LICENSE).
