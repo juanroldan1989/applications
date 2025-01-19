@@ -59,9 +59,7 @@ The primary use cases include:
 
 1. Docker Compose can start all applications locally:
 
-```bash
-docker-compose up
-```
+![](docker-compose.gif)
 
 2. Review each `README` file for each application to understand endpoints and ports.
 
