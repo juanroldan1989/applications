@@ -15,17 +15,15 @@ Greeting message is shown in a bubble next to a character from the TV Show "Frie
 
 ## Docker images available
 
-[add screenshot here]
+![Screenshot 2025-03-13 at 10 29 07](https://github.com/user-attachments/assets/199a542c-7e50-40b6-869a-65f859b26154)
 
 ## Endpoints
 
 ### `GET /`
 
-Fetches a `greeting` and `name` from the external services and returns a combined message via UI.
+Fetches a `greeting` and `name` from the external services and returns a random combined greeting message via UI in a bubble next to a "Friends" character.
 
-- Response:
-
-[screenshot here]
+![Screenshot 2025-03-13 at 10 24 16](https://github.com/user-attachments/assets/70916bdf-0c42-48fd-a9a1-bbd09837d736)
 
 ### `GET /health`
 
