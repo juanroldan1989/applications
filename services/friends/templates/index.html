@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Friends Greeter UI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      /* Center container vertically and horizontally */
+      .container-center {
+        min-height: 100vh;
+      }
+      /* Image container limits the image height and centers it */
+      .image-container {
+        max-height: 80vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .character-img {
+        width: auto;
+        max-height: 80vh;
+        object-fit: contain;
+        display: block;
+      }
+      /* Bubble container positions the bubble overlapping the image */
+      .bubble-container {
+        position: absolute;
+        top: 5%;
+        left: 100%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center container-center">
+    <div class="relative image-container mx-auto">
+      <!-- Character Image -->
+      <img
+        src="{{ url_for('static', filename=friend_image) }}"
+        alt="Friend Image"
+        class="character-img rounded shadow-lg"
+      />
+      <!-- Enlarged Greeting Bubble Overlap with Friends Palette -->
+      <div class="bubble-container">
+        <div
+          id="greeting-bubble"
+          class="px-12 py-8 text-white rounded-lg shadow-lg bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500"
+        >
+          <p id="greeting-message" class="text-2xl">{{ message }}</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

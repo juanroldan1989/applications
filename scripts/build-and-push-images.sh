@@ -24,3 +24,12 @@ for app in farewell greeting greeter fareweller name sqs-processor; do
 
   cd ..
 done
+
+# Build and push images for "friends" service using each "characther" as TAG
+cd friends
+for friend in chandler joey monica phoebe rachel ross; do
+  echo "Building Docker image for "friends" with tag $friend..."
+
+  docker buildx build --platform linux/amd64,linux/arm64 --build-arg FRIEND=$friend -t juanroldan1989/friends:$friend .
+  docker push juanroldan1989/friends:$friend
+done

@@ -27,23 +27,26 @@ and easily integrable with containerized environments like **Docker Compose**, *
 
 This repository contains the following Flask applications:
 
-1. **Farewell API**
+1. [Farewell API](/services/farewell/README.md)
    Returns a random farewell phrase.
 
-2. **Fareweller API**
+2. [Fareweller API](/services/fareweller/README.md)
    Returns a farewell message built based on Farewell and Name APIs.
 
-3. **Greeter API**
+3. [Greeter API](/services/greeter/README.md)
    Returns a greeting message built based on Greeting and Name APIs.
 
-4. **Greeting API**
+4. [Greeting API](/services/greeting/README.md)
    Provides greeting phrases.
 
-5. **Name API**
+5. [Name API](/services/name/README.md)
    Supplies random names.
 
-6. **SQS Processor**
+6. [SQS Processor](/services/sqs-processor/README.md)
    Processes SQS messages and displays states within a landing page.
+
+7. [Friends App](/services/friends/README.md)
+   This App displays a greeting message in a bubble next to a character from the TV Show "Friends".
 
 # Use Cases
 

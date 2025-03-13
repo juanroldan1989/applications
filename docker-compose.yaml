@@ -58,5 +58,18 @@ services:
     networks:
       - backend
 
+  friends:
+    build: services/friends
+    container_name: friends
+    environment:
+      - FRIEND=chandler
+    ports:
+      - "5007:5007"
+    networks:
+      - backend
+    depends_on:
+      - name
+      - greeting
+
 networks:
   backend:
