@@ -9,7 +9,7 @@ TAG=${1:-latest}
 cd ../services
 
 # Build and push images for all services
-for app in farewell greeting greeter fareweller name sqs-processor; do
+for app in name farewell greeting greeter greeter-saver fareweller sqs-processor; do
   echo "Building Docker image for $app with tag $TAG..."
   cd $app
 

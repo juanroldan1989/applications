@@ -35,5 +35,22 @@ class FarewellApiTestCase(unittest.TestCase):
         "Arrivederci", "Chow", "Ta-ta", "Cheerio"
     ])
 
+  def test_health_status_code(self):
+    """Test that the /health endpoint returns a 200 status code."""
+    response = self.app.get('/health')
+    self.assertEqual(response.status_code, 200)
+
+  def test_health_content_type(self):
+    """Test that the /health endpoint returns JSON content."""
+    response = self.app.get('/health')
+    self.assertEqual(response.content_type, 'application/json')
+
+  def test_health_response_format(self):
+    """Test that the response contains a 'status' key with value 'healthy'."""
+    response = self.app.get('/health')
+    data = json.loads(response.data)
+    self.assertIn('status', data)
+    self.assertEqual(data['status'], 'healthy')
+
 if __name__ == '__main__':
   unittest.main()

@@ -47,8 +47,11 @@ services:
     networks:
       - backend
     depends_on:
-      - name
-      - farewell
+      name: {condition: service_healthy}
+      farewell: {condition: service_healthy}
+    environment:
+      - NAME_SERVICE_URL=http://name:5001/name
+      - FAREWELL_SERVICE_URL=http://farewell:5004/phrase
 
   farewell:
     build: services/farewell
@@ -57,6 +60,11 @@ services:
       - "5004:5004"
     networks:
       - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://farewell:5004/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   sqs-processor:
     build: services/sqs-processor
@@ -74,15 +82,17 @@ services:
   friends:
     build: services/friends
     container_name: friends
-    environment:
-      - FRIEND=chandler
     ports:
       - "5007:5007"
     networks:
       - backend
     depends_on:
-      - name
-      - greeting
+      name: {condition: service_healthy}
+      greeting: {condition: service_healthy}
+    environment:
+      - NAME_SERVICE_URL=http://name:5001/name
+      - GREETING_SERVICE_URL=http://greeting:5002/greeting
+      - FRIEND=chandler
 
   greeter-saver:
     build: services/greeter-saver
@@ -118,7 +128,6 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
-
 
 volumes:
   pgdata:

@@ -12,5 +12,9 @@ farewells = ["See ya later", "Peace out", "Adios",
 def get_phrase():
   return jsonify(phrase=random.choice(farewells))
 
+@app.route("/health", methods=["GET"])
+def health():
+  return jsonify(status="healthy")
+
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5004)
