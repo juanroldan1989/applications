@@ -20,6 +20,11 @@ services:
       - "5001:5001"
     networks:
       - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://name:5001/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   greeting:
     build: services/greeting
@@ -28,6 +33,11 @@ services:
       - "5002:5002"
     networks:
       - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://greeting:5002/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   fareweller:
     build: services/fareweller
@@ -73,6 +83,45 @@ services:
     depends_on:
       - name
       - greeting
+
+  greeter-saver:
+    build: services/greeter-saver
+    container_name: greeter-saver
+    ports:
+      - "5008:5008"
+    networks:
+      - backend
+    depends_on:
+      name: {condition: service_healthy}
+      greeting: {condition: service_healthy}
+      database: {condition: service_healthy}
+    environment:
+      - NAME_SERVICE_URL=http://name:5001/name
+      - GREETING_SERVICE_URL=http://greeting:5002/greeting
+      - DATABASE_URL=postgresql://user:password@database:5432/mydatabase
+
+  database:
+    image: postgres:13-alpine
+    container_name: database
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mydatabase
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d mydatabase"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+
+volumes:
+  pgdata:
 
 networks:
   backend:
