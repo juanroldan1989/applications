@@ -9,6 +9,9 @@ services:
     depends_on:
       - name
       - greeting
+    environment:
+      - NAME_SERVICE_URL=http://name:5001/name
+      - GREETING_SERVICE_URL=http://greeting:5002/greeting
 
   name:
     build: services/name

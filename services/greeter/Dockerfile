@@ -38,8 +38,6 @@ COPY --chown=nonrootuser:nonrootuser . /app
 
 # Set environment variables
 ENV FLASK_APP=app.py
-ENV REDIS_HOST=redis
-ENV REDIS_PORT=6379
 
 # Expose the port the app runs on
 EXPOSE 5000

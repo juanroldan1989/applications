@@ -84,17 +84,12 @@ export FAREWELL_SERVICE_URL="http://localhost:5004/phrase"
 
 ### Docker
 
-- Build and run the Docker container:
+- Build and run the applications:
 
 ```bash
-docker build -t name-api .
-docker run -d -p 5001:5001 name-api
+cd applications
 
-docker build -t farewell-api .
-docker run -d -p 5004:5004 farewell-api
-
-docker build -t fareweller-api .
-docker run -d -p 5003:5003 fareweller-api
+docker-compose up name farewell fareweller --build
 ```
 
 - Access the API at http://localhost:5003

@@ -71,8 +71,8 @@ http://localhost:5001/name
 - Build and run the Docker container:
 
 ```bash
-docker build -t farewell-api .
-docker run -d -p 5004:5004 farewell-api
+docker build -t name-api .
+docker run -d -p 5001:5001 name-api
 ```
 
 - Access the API at http://localhost:5001/name.

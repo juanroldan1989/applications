@@ -86,7 +86,7 @@ export FRIEND="ross"
 
 ### Docker
 
-- Build and run the Docker container:
+- Build and run the applications:
 
 ```bash
 cd applications
