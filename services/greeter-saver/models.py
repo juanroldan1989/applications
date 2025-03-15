@@ -11,6 +11,8 @@ class Greeting(Base):
   created_at = Column(DateTime, server_default=func.now(), nullable=False)
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL is None:
+  raise EnvironmentError("DATABASE_URL environment variable not set")
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine)
 
