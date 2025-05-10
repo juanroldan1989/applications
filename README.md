@@ -19,34 +19,22 @@ _A collection of simple yet powerful microservices designed for cloud-native app
 
 # Introduction
 
-This repository serves as a portfolio of reusable Flask applications, each one designed to be modular, lightweight
+This repository serves as a portfolio of reusable applications, each one designed to be modular, lightweight
 
-and easily integrable with containerized environments like **Docker Compose**, **AWS ECS** and **AWS EKS**.
+and easily integrable with containerized solutions like **Docker Compose**, **AWS ECS** and **Kubernetes**.
 
 # Contents
 
-This repository contains the following Flask applications:
-
-1. [Farewell API](/services/farewell/README.md)
-   Returns a random farewell phrase.
-
-2. [Fareweller API](/services/fareweller/README.md)
-   Returns a farewell message built based on Farewell and Name APIs.
-
-3. [Greeter API](/services/greeter/README.md)
-   Returns a greeting message built based on Greeting and Name APIs.
-
-4. [Greeting API](/services/greeting/README.md)
-   Provides greeting phrases.
-
-5. [Name API](/services/name/README.md)
-   Supplies random names.
-
-6. [SQS Processor](/services/sqs-processor/README.md)
-   Processes SQS messages and displays states within a landing page.
-
-7. [Friends App](/services/friends/README.md)
-   This App displays a greeting message in a bubble next to a character from the TV Show "Friends".
+| Application                                        | Description                                                       |
+|----------------------------------------------------|-------------------------------------------------------------------|
+| [Farewell API](/services/farewell/README.md)       | Returns a random farewell phrase.                                 |
+| [Fareweller API](/services/fareweller/README.md)   | Returns a farewell message based on `Farewell` and `Name` APIs.   |
+| [Greeter API](/services/greeter/README.md)         | Returns a greeting message based on `Greeting` and `Name` APIs.   |
+| [Greeting API](/services/greeting/README.md)       | Returns greeting phrases.                                         |
+| [Greeter Saver](/services/greeter-saver/README.md) | Returns same response as Greeter API and saves response to a database. |
+| [Name API](/services/name/README.md)               | Returns a random name.                                                 |
+| [SQS Processor](/services/sqs-processor/README.md) | Processes SQS messages and displays stats in a landing page.           |
+| [Friends App](/services/friends/README.md)         | Displays a greeting message in a bubble next to a character from the TV Show "Friends" |
 
 # Use Cases
 

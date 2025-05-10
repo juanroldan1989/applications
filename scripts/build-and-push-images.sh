@@ -18,6 +18,7 @@ for app in name farewell greeting greeter greeter-saver fareweller sqs-processor
   # Useful for development on Apple M1 or other ARM-based systems
   # Useful for deployments on ARM-based systems like Raspberry Pi
   # Useful for deployments on EKS Nodes with x86_64 (amd64) architecture
+  # Useful for deployments on EKS Nodes with ARM64 architecture (e.g.: EC2 SPOT (Graviton) instances provided by Karpenter)
 
   # Push the tagged image to the repository
   docker push juanroldan1989/$app:$TAG
