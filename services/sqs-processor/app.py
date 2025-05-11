@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Environment variables
 QUEUE_URL = os.getenv("SQS_QUEUE_URL")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
-REGION_NAME = os.getenv("AWS_REGION", "us-east-1")
+REGION_NAME = os.getenv("AWS_REGION")
 LOCALSTACK_ENDPOINT = os.getenv("LOCALSTACK_ENDPOINT")
 
 # Conditional initialization of SQS client

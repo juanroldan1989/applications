@@ -13,8 +13,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # External service URLs (configurable via environment variables)
-NAME_SERVICE_URL = os.getenv("NAME_SERVICE_URL", "http://name:5001/name")
-FAREWELL_SERVICE_URL = os.getenv("FAREWELL_SERVICE_URL", "http://farewell:5004/phrase")
+NAME_SERVICE_URL = os.getenv("NAME_SERVICE_URL")
+FAREWELL_SERVICE_URL = os.getenv("FAREWELL_SERVICE_URL")
 
 @app.route("/", methods=["GET"])
 def farewell():

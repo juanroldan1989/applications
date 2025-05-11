@@ -13,8 +13,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # External service URLs (configurable via environment variables)
-NAME_SERVICE_URL = os.getenv("NAME_SERVICE_URL", "http://name:5001/name")
-GREETING_SERVICE_URL = os.getenv("GREETING_SERVICE_URL", "http://greeting:5002/greeting")
+NAME_SERVICE_URL = os.getenv("NAME_SERVICE_URL")
+GREETING_SERVICE_URL = os.getenv("GREETING_SERVICE_URL")
 
 app = Flask(__name__)
 
