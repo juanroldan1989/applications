@@ -111,7 +111,7 @@ services:
       - DATABASE_URL=postgresql://user:password@database:5432/mydatabase
 
   database:
-    image: postgres:13-alpine
+    image: postgres:16
     container_name: database
     environment:
       - POSTGRES_USER=user
