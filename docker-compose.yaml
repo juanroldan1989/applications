@@ -108,7 +108,12 @@ services:
     environment:
       - NAME_SERVICE_URL=http://name:5001/name
       - GREETING_SERVICE_URL=http://greeting:5002/greeting
-      - DATABASE_URL=postgresql://user:password@database:5432/mydatabase
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DATABASE=mydatabase
+      # - DATABASE_URL=postgresql://user:password@database:5432/mydatabase
 
   database:
     image: postgres:16

@@ -10,9 +10,22 @@ class Greeting(Base):
   message = Column(Text, nullable=False)
   created_at = Column(DateTime, server_default=func.now(), nullable=False)
 
+# Try DATABASE_URL first (backwards compatibility)
 DATABASE_URL = os.getenv("DATABASE_URL")
+
+# If not provided, build from individual env vars
 if DATABASE_URL is None:
-  raise EnvironmentError("DATABASE_URL environment variable not set")
+  postgres_host = os.getenv("POSTGRES_HOST")
+  postgres_port = os.getenv("POSTGRES_PORT", "5432")
+  postgres_user = os.getenv("POSTGRES_USER")
+  postgres_password = os.getenv("POSTGRES_PASSWORD")
+  postgres_db = os.getenv("POSTGRES_DATABASE")
+
+  if not all([postgres_host, postgres_user, postgres_password, postgres_db]):
+    raise EnvironmentError("Either DATABASE_URL or all POSTGRES_* environment variables must be set")
+
+  DATABASE_URL = f"postgresql://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_db}"
+
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine)
 
