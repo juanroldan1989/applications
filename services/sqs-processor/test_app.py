@@ -1,5 +1,11 @@
+import os
 import unittest
 from unittest.mock import patch, MagicMock
+
+os.environ.setdefault("SQS_QUEUE_URL", "test_queue_url")
+os.environ.setdefault("SLACK_WEBHOOK_URL", "test_webhook_url")
+os.environ.setdefault("AWS_REGION", "us-east-1")
+
 from app import app, process_message, send_to_slack
 
 class FlaskAppTestCase(unittest.TestCase):

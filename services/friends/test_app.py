@@ -37,6 +37,7 @@ class FriendsServiceTestCase(unittest.TestCase):
     data = json.loads(response.data)
     self.assertIn('status', data)
 
+  @patch.dict(os.environ, {"FRIEND": "phoebe"})
   def test_index_returns_html_and_includes_friend_image(self):
     """Test that the index route returns HTML content including the friend image reference."""
     response = self.app.get('/')
@@ -44,9 +45,7 @@ class FriendsServiceTestCase(unittest.TestCase):
     # Verify that the response content type is HTML
     self.assertIn('text/html', response.content_type)
     # Check that the friend image filename (set via env var) is included in the rendered template.
-    friend = os.getenv("FRIEND", "phoebe").lower()
-    friend_image = f"{friend}.png"
-    self.assertIn(friend_image, response.get_data(as_text=True))
+    self.assertIn("phoebe.png", response.get_data(as_text=True))
 
 if __name__ == '__main__':
   unittest.main()

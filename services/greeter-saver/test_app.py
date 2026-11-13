@@ -1,6 +1,11 @@
+import os
 import unittest
 from unittest.mock import patch
 import json
+
+# In-memory SQLite keeps the tests independent of a running Postgres.
+os.environ.setdefault("DATABASE_URL", "sqlite://")
+
 from app import app
 
 class GreeterServiceTestCase(unittest.TestCase):
@@ -23,18 +28,33 @@ class GreeterServiceTestCase(unittest.TestCase):
     self.assertEqual(response.status_code, 200)
     self.assertEqual(data['message'], 'Hello, Alice!')
 
-  def test_greet_status_code(self):
+  @patch('requests.get')
+  def test_greet_status_code(self, mock_get):
     """Test that the /greet endpoint returns a 200 status code."""
+    mock_get.side_effect = [
+      unittest.mock.Mock(json=lambda: {'name': 'Alice'}),
+      unittest.mock.Mock(json=lambda: {'greeting': 'Hello'})
+    ]
     response = self.app.get('/greet')
     self.assertEqual(response.status_code, 200)
 
-  def test_greet_content_type(self):
+  @patch('requests.get')
+  def test_greet_content_type(self, mock_get):
     """Test that the /greet endpoint returns JSON content."""
+    mock_get.side_effect = [
+      unittest.mock.Mock(json=lambda: {'name': 'Alice'}),
+      unittest.mock.Mock(json=lambda: {'greeting': 'Hello'})
+    ]
     response = self.app.get('/greet')
     self.assertEqual(response.content_type, 'application/json')
 
-  def test_greet_response_format(self):
+  @patch('requests.get')
+  def test_greet_response_format(self, mock_get):
     """Test that the /greet endpoint contains a 'message' key."""
+    mock_get.side_effect = [
+      unittest.mock.Mock(json=lambda: {'name': 'Alice'}),
+      unittest.mock.Mock(json=lambda: {'greeting': 'Hello'})
+    ]
     response = self.app.get('/greet')
     data = json.loads(response.data)
     self.assertIn('message', data)
