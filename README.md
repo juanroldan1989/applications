@@ -88,9 +88,10 @@ The tests mock every external dependency, so they need no running services or da
 [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs one matrix job per service:
 
 1. **Test**: installs the service's pinned dependencies and runs its unit tests on Python 3.12.
-2. **Build**: builds the image once its tests pass. Pull requests only prove the build; pushes to `main` build `linux/amd64` and `linux/arm64` and publish to Docker Hub.
+2. **Build** (pull requests): builds the image once its tests pass, without publishing.
+3. **Publish** (pushes to `main`): builds `linux/amd64` and `linux/arm64` images and pushes them to Docker Hub.
 
-Images are tagged with the short commit SHA (`juanroldan1989/<service>:<sha>`). Publishing needs the `DOCKER_USERNAME` and `DOCKER_PASSWORD` repository secrets.
+Images are tagged with the short commit SHA (`juanroldan1989/<service>:<sha>`). Publishing uses the `DOCKER_USERNAME` and `DOCKER_PASSWORD` (a Docker Hub access token) secrets of the `dockerhub` environment, which only the `main` branch can use.
 
 # Publishing images
 
