@@ -85,7 +85,7 @@ The tests mock every external dependency, so they need no running services or da
 
 ## CI
 
-[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs one matrix job per service:
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) first detects which services changed, then runs one matrix job per changed service. Changes outside `services/` (such as the README) run nothing, and a change to `ci.yml` runs every service.
 
 1. **Test**: installs the service's pinned dependencies and runs its unit tests on Python 3.12.
 2. **Build** (pull requests): builds the image once its tests pass, without publishing.
