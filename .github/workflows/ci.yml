@@ -16,21 +16,56 @@ env:
   REGISTRY_NAMESPACE: juanroldan1989
 
 jobs:
+  changes:
+    name: Detect changed services
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      services: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Output is a JSON list of the services whose folder (or this workflow) changed.
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            name:
+              - '.github/workflows/ci.yml'
+              - 'services/name/**'
+            greeting:
+              - '.github/workflows/ci.yml'
+              - 'services/greeting/**'
+            farewell:
+              - '.github/workflows/ci.yml'
+              - 'services/farewell/**'
+            fareweller:
+              - '.github/workflows/ci.yml'
+              - 'services/fareweller/**'
+            greeter:
+              - '.github/workflows/ci.yml'
+              - 'services/greeter/**'
+            greeter-saver:
+              - '.github/workflows/ci.yml'
+              - 'services/greeter-saver/**'
+            friends:
+              - '.github/workflows/ci.yml'
+              - 'services/friends/**'
+            sqs-processor:
+              - '.github/workflows/ci.yml'
+              - 'services/sqs-processor/**'
+
   test:
     name: Test (${{ matrix.service }})
+    needs: changes
+    if: needs.changes.outputs.services != '[]'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        service:
-          - name
-          - greeting
-          - farewell
-          - fareweller
-          - greeter
-          - greeter-saver
-          - friends
-          - sqs-processor
+        service: ${{ fromJSON(needs.changes.outputs.services) }}
     defaults:
       run:
         working-directory: services/${{ matrix.service }}
@@ -51,21 +86,13 @@ jobs:
 
   build:
     name: Build (${{ matrix.service }})
+    needs: [changes, test]
     if: github.event_name == 'pull_request'
-    needs: test
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        service:
-          - name
-          - greeting
-          - farewell
-          - fareweller
-          - greeter
-          - greeter-saver
-          - friends
-          - sqs-processor
+        service: ${{ fromJSON(needs.changes.outputs.services) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -81,23 +108,15 @@ jobs:
 
   publish:
     name: Publish (${{ matrix.service }})
+    needs: [changes, test]
     if: github.event_name == 'push'
-    needs: test
     runs-on: ubuntu-latest
     # Docker Hub secrets live in this environment, which is restricted to the main branch.
     environment: dockerhub
     strategy:
       fail-fast: false
       matrix:
-        service:
-          - name
-          - greeting
-          - farewell
-          - fareweller
-          - greeter
-          - greeter-saver
-          - friends
-          - sqs-processor
+        service: ${{ fromJSON(needs.changes.outputs.services) }}
     steps:
       - uses: actions/checkout@v4
 
