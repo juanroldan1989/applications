@@ -17,7 +17,7 @@ _A set of small Flask microservices used as a realistic workload for practising 
 7. [Contributing](#contributing)
 8. [License](#license)
 
-# Overview
+## Overview
 
 Each service is small on purpose, so the interesting part is how they run together: dependent startup order, health checks, configuration through environment variables, a PostgreSQL-backed service and an SQS consumer tested against LocalStack.
 
@@ -37,7 +37,7 @@ flowchart LR
   sqs-processor --> sqs[(SQS / LocalStack)]
 ```
 
-# Quickstart
+## Quickstart
 
 Requires Docker with Compose.
 
@@ -57,7 +57,7 @@ Stop and clean up with `docker compose down -v`.
 
 > The credentials in `docker-compose.yaml` (`user` / `password`, LocalStack `test`) are for local use only.
 
-# Services
+## Services
 
 | Service | Host port | Endpoints | Depends on | Description |
 |---|---|---|---|---|
@@ -70,7 +70,7 @@ Stop and clean up with `docker compose down -v`.
 | [friends](/services/friends/README.md) | 5007 | `/`, `/health` | name, greeting | Web UI showing the greeting in a bubble next to a character from "Friends" (chosen with `FRIEND`). |
 | [sqs-processor](/services/sqs-processor/README.md) | 5005 | `/`, `/api/poll-sqs` | SQS (LocalStack locally) | Polls an SQS queue, optionally posts to Slack and shows stats on a landing page. |
 
-# Development
+## Development
 
 Run a service's tests without Docker:
 
@@ -83,7 +83,7 @@ python -m unittest
 
 The tests mock every external dependency, so they need no running services or database.
 
-# CI
+## CI
 
 [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs one matrix job per service:
 
@@ -93,7 +93,7 @@ The tests mock every external dependency, so they need no running services or da
 
 Images are tagged with the short commit SHA (`juanroldan1989/<service>:<sha>`). Publishing uses the `DOCKER_USERNAME` and `DOCKER_PASSWORD` (a Docker Hub access token) secrets of the `dockerhub` environment, which only the `main` branch can use.
 
-# Publishing images
+## Publishing images
 
 To publish all images by hand with a tag of your choice (defaults to `latest`), run from the `scripts` folder:
 
@@ -106,10 +106,10 @@ The script also builds one `friends` image per character (`chandler`, `joey`, `m
 
 To remove every local image, container and volume Docker knows about, run `scripts/docker-clean-up.sh`. It is destructive and not limited to this project.
 
-# Contributing
+## Contributing
 
 Contributions are welcome and greatly appreciated! If you would like to contribute to this project, please follow the guidelines within [CONTRIBUTING.md](CONTRIBUTING.md).
 
-# License
+## License
 
 This project is licensed under the terms of the [MIT License](LICENSE).
