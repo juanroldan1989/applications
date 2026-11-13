@@ -1,5 +1,5 @@
 # Stage 1: Build stage
-FROM python:3.9-slim AS builder
+FROM python:3.12-slim AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --prefix=/install -r /app/requirements.txt
 
 # Stage 2: Final stage with only the necessary components
-FROM python:3.9-slim
+FROM python:3.12-slim
 
 # Set the working directory
 WORKDIR /app
