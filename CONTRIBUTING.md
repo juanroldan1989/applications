@@ -33,11 +33,17 @@ To add a new Flask application:
 `README.md`: Documentation for the application.
 ```
 
-4. Update the bash script and GitHub Actions workflow if needed.
+4. Register the new service
+
+Add it to `docker-compose.yaml`, to the service list in `scripts/build-and-push-images.sh` and to both matrices in `.github/workflows/ci.yml`.
 
 5. Run Tests
 
-Ensure your changes do not break existing functionality by running the tests:
+Ensure your changes do not break existing functionality by running the tests from the service folder:
+
+```bash
+python -m unittest
+```
 
 6. Commit Changes
 
